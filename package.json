@@ -1,0 +1,20 @@
+{
+  "name": "getopt-long",
+  "version": "0.1.0",
+  "description": "Get command line options",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "getopt",
+    "options",
+    "flags",
+    "cli",
+    "args",
+    "argv",
+    "switches"
+  ],
+  "author": "Douglas L. Jenkins <douglas.jenkins@nike.com>",
+  "license": "ISC"
+}
