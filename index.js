@@ -68,7 +68,20 @@ function getFlagValue(flagType, flags, opts, parsedArg, args) {
   return flags;
 }
 
-function getOpts(opts, args, flags = {}, leftovers = []) {
+function getOpts(opts, args) {
+  // Remove the first two args from argv
+  const { flags, leftovers } = _getOpts(opts, args.slice(2));
+
+  return {
+    bin: args[0],
+    file: arg[1],
+    opts: flags,
+    args: leftovers,
+  }
+
+}
+
+function _getOpts(opts, args, flags = {}, leftovers = []) {
   if (!args.length) {
     return {
       flags,
