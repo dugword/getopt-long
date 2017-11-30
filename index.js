@@ -13,6 +13,15 @@ function getHelp(opts) {
     const flags = [short, long].filter(flag => flag).join(', ');
     const spaceLength = (flags.length > helpWidth) ? 1 : helpWidth - flags.length;
     console.log(`${flags}${' '.repeat(spaceLength)}${opts[opt].description}`);
+
+    if (opts.help && opts.help.body) {
+      if (typeof opts.help.body === 'string') {
+        console.log(opts.help.body);
+      }
+      else if (typof opts.help.body === 'function') {
+        opts.help.body();
+      }
+    }
   });
 }
 
