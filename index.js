@@ -26,7 +26,7 @@ function getHelp(opts) {
       if (typeof opts.help.body === 'string') {
         console.log(opts.help.body);
       }
-      else if (typof opts.help.body === 'function') {
+      else if (typeof opts.help.body === 'function') {
         opts.help.body();
       }
     }
