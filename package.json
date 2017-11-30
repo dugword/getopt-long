@@ -1,6 +1,6 @@
 {
   "name": "getopt-long",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Get command line options",
   "main": "index.js",
   "scripts": {
