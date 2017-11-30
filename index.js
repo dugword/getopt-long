@@ -70,7 +70,10 @@ function getFlagValue(flagType, flags, opts, parsedArg, args) {
 
 function getOpts(opts, args) {
   // Remove the first two args from argv
+  console.log(args);
   const { flags, leftovers } = _getOpts(opts, args.slice(2));
+  console.log(flags);
+  console.log(leftovers);
 
   return {
     bin: args[0],
@@ -124,7 +127,7 @@ function _getOpts(opts, args, flags = {}, leftovers = []) {
     leftovers.push(arg);
   }
 
-  return getOpts(opts, args, flags, leftovers);
+  return _getOpts(opts, args, flags, leftovers);
 }
 
 module.exports = {
