@@ -9,6 +9,8 @@ function getHelp(opts) {
     console.log('Example:', opts.help.example);
   }
 
+  console.log();
+
   const helpWidth = 24;
   Object.keys(opts).forEach((opt) => {
     if (opts[opt].implemented === false) {
@@ -22,15 +24,18 @@ function getHelp(opts) {
     const spaceLength = (flags.length > helpWidth) ? 1 : helpWidth - flags.length;
     console.log(`${flags}${' '.repeat(spaceLength)}${opts[opt].description}`);
 
-    if (opts.help && opts.help.body) {
-      if (typeof opts.help.body === 'string') {
-        console.log(opts.help.body);
-      }
-      else if (typeof opts.help.body === 'function') {
-        opts.help.body();
-      }
-    }
   });
+
+  if (opts.help && opts.help.body) {
+    console.log();
+
+    if (typeof opts.help.body === 'string') {
+      console.log(opts.help.body);
+    }
+    else if (typeof opts.help.body === 'function') {
+      opts.help.body();
+    }
+  }
 }
 
 function assignFlagValue(flags, opts, optKey, value) {
