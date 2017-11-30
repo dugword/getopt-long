@@ -113,8 +113,8 @@ function _getOpts(opts, args, flags = {}, leftovers = []) {
 
   const arg = args.shift();
 
-  const longMatch = arg.match(/--(\w(?:\w|-)*\w)/);
-  const shortMatch = arg.match(/-((\w)+)/);
+  const longMatch = arg.match(/^--(\w(?:\w|-)*\w)$/);
+  const shortMatch = arg.match(/^-((\w)+)$/);
 
   if (longMatch) {
 
