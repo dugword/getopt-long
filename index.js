@@ -1,6 +1,14 @@
 'use strict';
 
 function getHelp(opts) {
+  if (opts.help && opts.help.usage) {
+    console.log('Usage:', opts.help.usage);
+  }
+
+  if (opts.help && opts.help.example) {
+    console.log('Example:', opts.help.example);
+  }
+
   const helpWidth = 24;
   Object.keys(opts).forEach((opt) => {
     if (opts[opt].implemented === false) {
