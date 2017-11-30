@@ -74,7 +74,7 @@ function getOpts(opts, args) {
 
   return {
     bin: args[0],
-    file: arg[1],
+    file: args[1],
     opts: flags,
     args: leftovers,
   }
