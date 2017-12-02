@@ -17,6 +17,10 @@ function getHelp(opts) {
       return;
     }
 
+    if (opt === 'help') {
+      return;
+    }
+
     const short = opts[opt].short ? `-${opts[opt].short}` : undefined;
     const long = opts[opt].long ? `--${opts[opt].long}` : undefined;
 
@@ -25,6 +29,9 @@ function getHelp(opts) {
     console.log(`${flags}${' '.repeat(spaceLength)}${opts[opt].description}`);
 
   });
+
+  const spaceLength = helpWidth - '--help'.length;
+  console.log(`--help${' '.repeat(spaceLength)} Print this help menu and exit`);
 
   if (opts.help && opts.help.body) {
     console.log();
@@ -133,11 +140,6 @@ function _getOpts(opts, args, flags = {}, leftovers = []) {
     const parsedArgs = shortMatch[1].split('');
 
     parsedArgs.forEach((parsedArg) => {
-      if (parsedArg === 'h') {
-        getHelp(opts);
-        process.exit();
-      }
-
       flags = getFlagValue('short', flags, opts, parsedArg, args);
     });
 
