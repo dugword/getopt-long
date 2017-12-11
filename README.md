@@ -1,6 +1,6 @@
 # NAME
 
-**Getopt-Long** Extended processing of command line options
+`getopt-long` - Extended processing of command line options with automatic help
 
 # SYNOPSIS
 ```js
@@ -61,8 +61,8 @@ console.dir(opts);
 
 ```sh
 $ script firstArg -fs fileName -p prop --count 42 secondArg --extra-properties two -O --extra-properties one thirdArgg
-{ bin: '/Users/djenk9/.nvm/versions/node/v6.10.3/bin/node',
-  file: '/Users/djenk9/Projects/JavaScript/Node/getopt-long/test/example.js',
+{ bin: '/Users/pfry/.nvm/versions/node/v6.10.3/bin/node',
+  file: '/Users/pfry/Projects/JavaScript/Node/getopt-long/test/example.js',
   opts:
    { shortHandFlag: true,
      someFile: 'fileName',

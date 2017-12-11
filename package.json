@@ -1,10 +1,14 @@
 {
   "name": "getopt-long",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "Get command line options",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error-okay: no test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dugword/getopt-long.git"
   },
   "keywords": [
     "getopt",
@@ -15,6 +19,6 @@
     "argv",
     "switches"
   ],
-  "author": "Douglas L. Jenkins <douglas.jenkins@nike.com>",
+  "author": "Douglas L. Jenkins <dugword@gmail.com>",
   "license": "ISC"
 }
