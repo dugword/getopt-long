@@ -26,7 +26,7 @@ function getHelp(opts) {
 
     const flags = [short, long].filter(flag => flag).join(', ');
     const spaceLength = (flags.length > helpWidth) ? 1 : helpWidth - flags.length;
-    console.log(`${flags}${' '.repeat(spaceLength)}${opts[opt].description || opts[opt].type || 'boolean'}`);
+    console.log(`${flags}${' '.repeat(spaceLength)}${opts[opt].description || opts[opt].type || 'boolean'}${opts[opt].required ? 'REQUIRED' : ''`);
 
   });
 
@@ -160,22 +160,22 @@ function getOpts(opts, args) {
   }, {});
 
   // Remove the first two args from argv
-  const { flags, leftovers } = _getOpts(decodedOpts, args.slice(2));
+  const { flags, tail } = _getOpts(decodedOpts, args.slice(2));
 
   return {
     bin: args[0],
     file: args[1],
     opts: flags,
-    args: leftovers,
+    args: tail,
   }
 
 }
 
-function _getOpts(opts, args, flags = {}, leftovers = []) {
+function _getOpts(opts, args, flags = {}, tail = []) {
   if (!args.length) {
     return {
       flags,
-      leftovers,
+      tail,
     };
   }
 
@@ -206,10 +206,10 @@ function _getOpts(opts, args, flags = {}, leftovers = []) {
 
   }
   else {
-    leftovers.push(arg);
+    tail.push(arg);
   }
 
-  return _getOpts(opts, args, flags, leftovers);
+  return _getOpts(opts, args, flags, tail);
 }
 
 module.exports = {
