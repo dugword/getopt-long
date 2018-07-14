@@ -44,6 +44,12 @@ const cliOpts = {
     description: 'Pass additional options, can be passed multiple times',
   },
 
+  requiredProperty: {
+    long: 'required-property',
+    type: 'string',
+    description: 'This option is required, and will throw an error if missing',
+    required: 'This field will be the error message',
+  },
 
   help: {
     usage: 'script [OPTS...] ARGUMENTS...',
@@ -54,15 +60,22 @@ const cliOpts = {
   },
 };
 
-const opts = getOpts(cliOpts, process.argv);
+let opts;
+try {
+  opts = getOpts(cliOpts, process.argv);
+}
+catch (err) {
+  console.error(err.message);
+  process.exit(1);
+}
 
 console.dir(opts);
 ```
 
 ```sh
-$ script firstArg -fs fileName -p prop --count 42 secondArg --extra-properties two -O --extra-properties one thirdArgg
-{ bin: '/Users/pfry/.nvm/versions/node/v6.10.3/bin/node',
-  file: '/Users/pfry/Projects/JavaScript/Node/getopt-long/test/example.js',
+$ script firstArg -fs fileName -p prop --count 42 secondArg --extra-properties two -O --extra-properties one --required-property token thirdArgg
+{ bin: '/Users/djenk9/.nvm/versions/node/v6.10.3/bin/node',
+  file: '/Users/djenk9/Projects/JavaScript/Node/getopt-long/test/example.js',
   opts:
    { shortHandFlag: true,
      someFile: 'fileName',
@@ -70,7 +83,8 @@ $ script firstArg -fs fileName -p prop --count 42 secondArg --extra-properties t
      count: 42,
      extraProperties: [ 'two', 'one' ],
      someOptionalSetting: true,
-     someAdditionalSetting: true },
+     someAdditionalSetting: true,
+     requiredProperty: 'token' },
   args: [ 'firstArg', 'secondArg', 'thirdArgg' ] }
 
 ```
@@ -86,6 +100,7 @@ Usage: script [OPTS...] ARGUMENTS...
 -o                            Enable some optional setting
 -O                            Enable some additional setting, and also some optional setting
 --extra-properties            Pass additional options, can be passed multiple times
+-t, --security-token          REQUIRED: This option is required, and will throw an error if missing
 --help                        Print this help menu and exit
 
 The --help option is automatically created. Additional usage and body properties can be set
