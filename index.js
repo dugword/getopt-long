@@ -226,4 +226,5 @@ function _getOpts(opts, args, flags = {}, tail = []) {
 
 module.exports = {
   getOpts,
+  getHelp,
 };
