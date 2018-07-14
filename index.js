@@ -1,6 +1,6 @@
 'use strict';
 
-function getHelp(opts) {
+function printHelp(opts) {
   if (opts.help && opts.help.usage) {
     console.log('Usage:', opts.help.usage);
   }
@@ -201,7 +201,7 @@ function _getOpts(opts, args, flags = {}, tail = []) {
     const parsedArg = longMatch[1];
 
     if (parsedArg === 'help') {
-      getHelp(opts);
+      pringHelp(opts);
       process.exit();
     }
 
@@ -226,5 +226,5 @@ function _getOpts(opts, args, flags = {}, tail = []) {
 
 module.exports = {
   getOpts,
-  getHelp,
+  printHelp,
 };
