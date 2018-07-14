@@ -38,6 +38,12 @@ const cliOpts = {
     description: 'Pass additional options, can be passed multiple times',
   },
 
+  requiredProperty: {
+    long: 'required-property',
+    type: 'string',
+    description: 'This option is required, and will throw an error if missing',
+    required: 'This field will be the error message',
+  },
 
   help: {
     usage: 'script [OPTS...] ARGUMENTS...',
@@ -48,6 +54,13 @@ const cliOpts = {
   },
 };
 
-const opts = getOpts(cliOpts, process.argv);
+let opts;
+try {
+  opts = getOpts(cliOpts, process.argv);
+}
+catch (err) {
+  console.error(err.message);
+  process.exit(1);
+}
 
 console.dir(opts);

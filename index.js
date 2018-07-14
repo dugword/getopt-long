@@ -26,7 +26,7 @@ function getHelp(opts) {
 
     const flags = [short, long].filter(flag => flag).join(', ');
     const spaceLength = (flags.length > helpWidth) ? 1 : helpWidth - flags.length;
-    console.log(`${flags}${' '.repeat(spaceLength)}${opts[opt].description || opts[opt].type || 'boolean'}${opts[opt].required ? 'REQUIRED' : ''`);
+    console.log(`${flags}${' '.repeat(spaceLength)}${opts[opt].required ? 'REQUIRED: ' : ''}${opts[opt].description || opts[opt].type || 'boolean'}`);
 
   });
 
@@ -159,8 +159,19 @@ function getOpts(opts, args) {
     return decodedOpts;
   }, {});
 
-  // Remove the first two args from argv
+  // Remove the first two args from argv: execPath and filePath
   const { flags, tail } = _getOpts(decodedOpts, args.slice(2));
+
+
+  const requiredOpts = Object.keys(decodedOpts).filter((optKey) => (decodedOpts[optKey].required));
+
+  const missingRequiredOpts = requiredOpts.filter(requiredOpt => !flags[requiredOpt]);
+
+  if (missingRequiredOpts.length) {
+    const errorMessages = missingRequiredOpts.map(missingRequiredOpt => decodedOpts[missingRequiredOpt].required);
+
+    throw new Error(errorMessages.join('\n'));
+  }
 
   return {
     bin: args[0],
@@ -172,6 +183,7 @@ function getOpts(opts, args) {
 }
 
 function _getOpts(opts, args, flags = {}, tail = []) {
+
   if (!args.length) {
     return {
       flags,
