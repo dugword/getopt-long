@@ -94,10 +94,10 @@ $ script firstArg -fs fileName -p prop --count 42 secondArg --extra-properties t
 $ script --help
 Usage: script [OPTS...] ARGUMENTS...
 
--f                            boolean
--p, --short-hand STRING       string
+-f                            shortHandFlag
+-p, --short-hand STRING       shortHandProperty
 -s, --some-file FILE          Name of some file
---count NUMBER                number
+--count NUMBER                count
 -o                            Enable some optional setting
 -O                            Enable some additional setting, and also some optional setting
 --extra-properties STRING     Pass additional options, can be passed multiple times

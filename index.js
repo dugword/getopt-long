@@ -36,7 +36,7 @@ function printHelp(opts) {
     }
 
     const spaceLength = (flags.length > helpWidth) ? 1 : helpWidth - flags.length;
-    console.log(`${flags}${' '.repeat(spaceLength)}${opts[opt].required ? 'REQUIRED: ' : ''}${opts[opt].description || opts[opt].type || 'boolean'}`);
+    console.log(`${flags}${' '.repeat(spaceLength)}${opts[opt].required ? 'REQUIRED: ' : ''}${opts[opt].description}`);
 
   });
 
@@ -72,8 +72,10 @@ function assignFlagValue(flags, opts, optKey, value) {
 
 function getFlagValue(flagType, flags, opts, parsedArg, args) {
 
+  let unknownOption = true;
   Object.keys(opts).forEach((optKey) => {
     if (parsedArg === opts[optKey][flagType]) {
+      unknownOption = false;
       if (opts[optKey].implemented === false) {
         throw new Error('Option not implemented');
       }
@@ -86,7 +88,6 @@ function getFlagValue(flagType, flags, opts, parsedArg, args) {
 
       if (opts[optKey].type === 'boolean' || opts[optKey].type === undefined) {
         flags = assignFlagValue(flags, opts, optKey, true);
-        return flags;
       }
       else if (opts[optKey].type === 'string') {
         const value = args.shift();
@@ -95,7 +96,6 @@ function getFlagValue(flagType, flags, opts, parsedArg, args) {
         }
 
         flags = assignFlagValue(flags, opts, optKey, value);
-        return flags;
       }
       else if (opts[optKey].type === 'number') {
         const value = args.shift();
@@ -107,14 +107,13 @@ function getFlagValue(flagType, flags, opts, parsedArg, args) {
         }
 
         flags = assignFlagValue(flags, opts, optKey, +value);
-        return flags;
       }
-
-
     }
-
-    return undefined;
   });
+
+  if (unknownOption) {
+      throw new Error(`Unknown option: ${parsedArg}`);
+  }
 
   return flags;
 }
@@ -163,7 +162,7 @@ function getOpts(opts, args) {
     }
 
     if (!decodedOpts[optKey].description) {
-      decodedOpts[optKey].description = decodedOpts[optKey].type;
+      decodedOpts[optKey].description = optKey;
     }
 
     return decodedOpts;
