@@ -17,6 +17,7 @@ const cliOpts = {
     short: 's',
     type: 'string',
     description: 'Name of some file',
+    parameter: 'FILE',
   },
 
   count: {
@@ -94,13 +95,13 @@ $ script --help
 Usage: script [OPTS...] ARGUMENTS...
 
 -f                            boolean
--p, --short-hand-property     string
--s, --some-file               Name of some file
---count                       number
+-p, --short-hand STRING       string
+-s, --some-file FILE          Name of some file
+--count NUMBER                number
 -o                            Enable some optional setting
 -O                            Enable some additional setting, and also some optional setting
---extra-properties            Pass additional options, can be passed multiple times
--t, --security-token          REQUIRED: This option is required, and will throw an error if missing
+--extra-properties STRING     Pass additional options, can be passed multiple times
+--required-property STRING    REQUIRED: This option is required, and will throw an error if missing
 --help                        Print this help menu and exit
 
 The --help option is automatically created. Additional usage and body properties can be set

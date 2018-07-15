@@ -24,7 +24,17 @@ function printHelp(opts) {
     const short = opts[opt].short ? `-${opts[opt].short}` : undefined;
     const long = opts[opt].long ? `--${opts[opt].long}` : undefined;
 
-    const flags = [short, long].filter(flag => flag).join(', ');
+    let flags = [short, long].filter(flag => flag).join(', ');
+    if (opts[opt].parameter) {
+      flags += (' ' + opts[opt].parameter);
+    }
+    else if (opts[opt].type === 'string') {
+      flags += ' STRING'
+    }
+    else if (opts[opt].type === 'number') {
+      flags += ' NUMBER'
+    }
+
     const spaceLength = (flags.length > helpWidth) ? 1 : helpWidth - flags.length;
     console.log(`${flags}${' '.repeat(spaceLength)}${opts[opt].required ? 'REQUIRED: ' : ''}${opts[opt].description || opts[opt].type || 'boolean'}`);
 

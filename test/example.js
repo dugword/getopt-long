@@ -4,13 +4,14 @@ const cliOpts = {
 
   shortHandFlag: 'f',
 
-  shortHandProperty: 'short-hand-property|p=s',
+  shortHandProperty: 'short-hand|p=s',
 
   someFile: {
     long: 'some-file',
     short: 's',
     type: 'string',
     description: 'Name of some file',
+    parameter: 'FILE',
   },
 
   count: {
