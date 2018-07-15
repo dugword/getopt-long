@@ -201,7 +201,7 @@ function _getOpts(opts, args, flags = {}, tail = []) {
     const parsedArg = longMatch[1];
 
     if (parsedArg === 'help') {
-      pringHelp(opts);
+      printHelp(opts);
       process.exit();
     }
 
